@@ -7,8 +7,8 @@ interface StatsCardProps {
 export function StatsCard({ title, subtitle, value }: StatsCardProps) {
   return (
     <div className="bg-secondary reounded-xl border border-surface/20">
-      <h1 className=" text-xl text-primary">{title}</h1>
-      {subtitle && <h2 className="text-lg text-secondary">{subtitle}</h2>}
+      <p className=" text-lg text-primary">{title}</p>
+      {subtitle && <p className="text-md text-secondary">{subtitle}</p>}
       <p>{value}</p>
     </div>
   );
