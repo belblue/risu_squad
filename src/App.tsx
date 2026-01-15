@@ -1,8 +1,7 @@
 import "./App.css";
 import { Header } from "./components/layout/Header";
-import { StatsCard } from "./components/dahsboard/StatsCard";
 import { Footer } from "./components/layout/Footer";
-
+import { Dashboard } from "./pages/Dashboard";
 function App() {
   return (
     <>
@@ -10,14 +9,8 @@ function App() {
         <Header />
         {/* main */}
         <main className="p-8">
-          <h1 className="text-3xl text-primary"> Taraxa Dashboard</h1>
+          <Dashboard />
         </main>
-        <StatsCard
-          title="Balance"
-          value="100 TARA"
-          subtitle="Your current balance"
-        />
-        <StatsCard title="Transactions" value="250" />
       </div>
       <Footer />
     </>
