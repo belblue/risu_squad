@@ -1,10 +1,15 @@
 import { StatsCard } from "../components/dahsboard/StatsCard";
 import { useConnection, useBalance } from "wagmi";
 import { formatUnits } from "viem";
+//import { useValidators } from "../hooks/useValidators";
+import { ValidatorList } from "../components/validators/validatorList";
 
-export function Dashboard() {
+interface DashboardProps {
+  mode: "easy" | "expert";
+}
+
+export function Dashboard({ mode }: DashboardProps) {
   const { address, isConnected } = useConnection();
-
   //fetch native token balance (TARA)
   const { data: balance } = useBalance({
     address: address,
@@ -15,6 +20,8 @@ export function Dashboard() {
         maximumFractionDigits: 2,
       })
     : "0";
+  //load validators
+  //const { validators, isLoading, error } = useValidators();
 
   if (!isConnected) {
     //not connected
@@ -30,15 +37,37 @@ export function Dashboard() {
       </div>
     );
   }
+  //expert mode
+  if (mode == "expert") {
+    return (
+      <div>
+        <h1>Your information</h1>
+        <p>
+          Connected: {address?.slice(0, 6)}...{address?.slice(-4)}
+        </p>
+
+        <StatsCard
+          title="Available Balance"
+          value={`${formattedBalance}"TARA"`}
+          subtitle="Your current balance"
+        />
+        <StatsCard title="Staked Tara" value="250" subtitle="Earning rewards" />
+        <StatsCard title="APY" value="250" subtitle="Lifetime returns" />
+        <p>Compounded APY vs Simple APR</p>
+      </div>
+    );
+  }
+
+  //easy mode by default-new users have less patience than seasoned ones
   return (
     <div>
-      <h1>Your dashboard</h1>
+      <h1>Your information</h1>
       <p>
         Connected: {address?.slice(0, 6)}...{address?.slice(-4)}
       </p>
 
       <StatsCard
-        title="Available Balance"
+        title="Available Balance in your wallet"
         value={`${formattedBalance}"TARA"`}
         subtitle="Your current balance"
       />
@@ -48,6 +77,18 @@ export function Dashboard() {
         value="250"
         subtitle="Lifetime returns"
       />
+      <StatsCard
+        title="Yearly return in your current validator"
+        value="250"
+        subtitle="Expected yearly earning"
+      />
+      <p> If you stake 10,000 TARA, you'll earn ~1,450 TARA per year</p>
+      <p>
+        Compound: With auto-reinvest: 15.2% yearly" vs "Without: 14.5% yearly"
+      </p>
+      <div>
+        <ValidatorList mode={mode} />
+      </div>
     </div>
   );
 }

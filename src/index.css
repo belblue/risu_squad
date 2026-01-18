@@ -2,19 +2,19 @@
 
 @theme {
   /* Primary - Emerald: CTAs, success states, links */
-  --color-primary: #15AB5A;
+  --color-primary: #15ab5a;
 
   /* Accent/Danger - Crimson: Errors, alerts, highlights */
-  --color-danger: #DF4444;
+  --color-danger: #df4444;
 
   /* Surface/Light - Lavender Mist: Cards, highlights, tags */
-  --color-surface: #F0D3F7;
+  --color-surface: #f0d3f7;
 
   /* Secondary - Purple Haze: Secondary buttons, text */
-  --color-secondary: #302F4D;
+  --color-secondary: #302f4d;
 
   /* Dark/Background - Deep Violet: Dark mode, headers, footers */
-  --color-dark: #120D31;
+  --color-dark: #120d31;
 }
 
 :root {
