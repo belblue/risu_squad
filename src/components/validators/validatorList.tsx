@@ -12,7 +12,7 @@ export function ValidatorList({ mode }: ValidatorListProps) {
   }
   if (error) {
     return (
-      <p className="text-red-500">Error loading validators: {error.message}</p>
+      <p className="text-red-500">Error loading validators:{error.message}</p>
     );
   }
   if (validators.length === 0) {

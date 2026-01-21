@@ -1,4 +1,4 @@
-import { StatsCard } from "../components/dahsboard/StatsCard";
+import { StatsCard } from "../components/dashboard/StatsCard";
 import { useConnection, useBalance } from "wagmi";
 import { formatUnits } from "viem";
 //import { useValidators } from "../hooks/useValidators";
@@ -54,6 +54,7 @@ export function Dashboard({ mode }: DashboardProps) {
         <StatsCard title="Staked Tara" value="250" subtitle="Earning rewards" />
         <StatsCard title="APY" value="250" subtitle="Lifetime returns" />
         <p>Compounded APY vs Simple APR</p>
+        <ValidatorList mode={mode} />
       </div>
     );
   }
