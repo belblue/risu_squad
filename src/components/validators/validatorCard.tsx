@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { type Validator } from "../../hooks/useValidators";
 
 interface ValidatorCardProps {
@@ -56,12 +57,6 @@ export function ValidatorCard({ validator, mode }: ValidatorCardProps) {
               style={{ width: `${Math.min(delegationPercent, 100)}%` }}
             />
           </div>
-          {/* Show rank in expert mode */}
-          {mode === "expert" && validator.rank && (
-            <p className="text-sm text-surface/60 mt-2">
-              Rank: #{validator.rank}
-            </p>
-          )}
         </div>
       </div>
     </div>

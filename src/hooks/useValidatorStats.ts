@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+/*import { useQuery } from "@tanstack/react-query";
 
 export interface ValidatorStats {
   address: string;
@@ -16,14 +16,17 @@ interface ApiValidator {
 }
 
 async function fetchValidatorsStats(): Promise<ValidatorStats[]> {
-  const response = await fetch(
-    "https://indexer.mainnet.taraxa.io/api/validators",
+  console.log("Starting fetch..."); // Debug 1
+ 
+   const response = await fetch(
+    "https://mainnet.explorer.taraxa.io/api/validators",
   );
   if (!response.ok) {
     throw new Error("Failed to fetch validator stats");
   }
   //parse json response
   const json = await response.json();
+  console.log("API Response:", json);
   //transfrom api data to new array by transforming each item
   return json.data.map((v: ApiValidator) => ({
     address: v.address.toLowerCase(),
@@ -46,3 +49,4 @@ export function useValidatorStats() {
     refetchInterval: 60 * 1000,
   });
 }
+*/

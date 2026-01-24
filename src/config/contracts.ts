@@ -39,4 +39,41 @@ export const DPOS_ABI = [
       { name: "end", type: "bool" },
     ],
   },
+
+  // Get delegations for an address
+  {
+    name: "getDelegations",
+    type: "function",
+    stateMutability: "view",
+    inputs: [
+      { name: "delegator", type: "address" },
+      { name: "batch", type: "uint32" },
+    ],
+    outputs: [
+      {
+        type: "tuple[]",
+        components: [
+          { name: "account", type: "address" }, // validator address
+          {
+            name: "delegation",
+            type: "tuple",
+            components: [
+              { name: "stake", type: "uint256" },
+              { name: "rewards", type: "uint256" },
+            ],
+          },
+        ],
+      },
+      { name: "end", type: "bool" },
+    ],
+  },
+
+  // Claim all rewards
+  {
+    name: "claimAllRewards",
+    type: "function",
+    stateMutability: "nonpayable",
+    inputs: [],
+    outputs: [],
+  },
 ] as const;

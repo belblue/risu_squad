@@ -13,7 +13,6 @@ const mockValidator: Validator = {
   comission: 10,
   description: "miaumiaumia",
   yield: 14.4,
-  rank: 1,
   isActive: true,
 };
 
@@ -46,11 +45,7 @@ describe("ValidatorCard", () => {
       screen.queryByText("0x1234567890abcdef1234567890abcdef12345678"),
     ).not.toBeInTheDocument();
   });
-  //Conditional rendering
-  it("shows rank in expert mode", () => {
-    render(<ValidatorCard mode="expert" validator={mockValidator} />);
-    expect(screen.getByText("Rank: #1")).toBeInTheDocument();
-  });
+
   //isActive boolean handling
   it("active status", () => {
     render(<ValidatorCard mode="easy" validator={mockValidator} />);

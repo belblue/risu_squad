@@ -3,6 +3,7 @@ import { useConnection, useBalance } from "wagmi";
 import { formatUnits } from "viem";
 //import { useValidators } from "../hooks/useValidators";
 import { ValidatorList } from "../components/validators/validatorList";
+import { StakerCard } from "../components/dashboard/stakerCard";
 
 interface DashboardProps {
   mode: "easy" | "expert";
@@ -45,7 +46,7 @@ export function Dashboard({ mode }: DashboardProps) {
         <p>
           Connected: {address?.slice(0, 6)}...{address?.slice(-4)}
         </p>
-
+        <StakerCard mode={mode} />
         <StatsCard
           title="Available Balance"
           value={`${formattedBalance}"TARA"`}
@@ -66,12 +67,12 @@ export function Dashboard({ mode }: DashboardProps) {
       <p>
         Connected: {address?.slice(0, 6)}...{address?.slice(-4)}
       </p>
-
       <StatsCard
         title="Available Balance in your wallet"
         value={`${formattedBalance}"TARA"`}
         subtitle="Your current balance"
       />
+      <StakerCard /> {/*mode={mode}*/}
       <StatsCard title="Staked Tara" value="250" subtitle="Earning rewards" />
       <StatsCard
         title="Total earnings"
