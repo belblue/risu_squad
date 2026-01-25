@@ -24,17 +24,17 @@ export function StakerCard({ mode }: StakerCardProps) {
   const yearlyReturn = (totalStaked * apr).toLocaleString(undefined, {
     maximumFractionDigits: 0,
   }); //given the apr is 14
-  if (isLoading) return <div className="p-4">{t("staking.loading")}</div>;
+  if (isLoading) return <div className="p-4">{t(`staking.${mode}.loading`)}</div>;
 
   return (
     <div className="bg-secondary p-6 rounded-lg">
-      <h2 className="text-xl mb-4">{t("staking.title")}</h2>
+      <h2 className="text-xl mb-4">{t(`staking.${mode}.title`)}</h2>
 
       <div className="space-y-2">
         <p>
-          {t("staking.totalStaked", { amount: totalStaked.toLocaleString() })}
+          {t(`staking.${mode}.totalStaked`, { amount: totalStaked.toLocaleString() })}
         </p>
-        <p>{t("staking.rewards", { amount: totalRewards.toFixed(4) })}</p>
+        <p>{t(`staking.${mode}.rewards`, { amount: totalRewards.toFixed(4) })}</p>
       </div>
 
       <button
@@ -49,41 +49,41 @@ export function StakerCard({ mode }: StakerCardProps) {
         `}
       >
         {isClaiming
-          ? t("staking.claiming")
+          ? t(`staking.${mode}.claiming`)
           : isSuccess
-            ? t("staking.claimed")
+            ? t(`staking.${mode}.claimed`)
             : totalRewards === 0
-              ? t("staking.nothingToClaim")
-              : t("staking.claimRewards")}
+              ? t(`staking.${mode}.nothingToClaim`)
+              : t(`staking.${mode}.claimRewards`)}
       </button>
-      <p>{t("staking.yearlyReturn", { amount: yearlyReturn })}</p>
-      {/*expert mode show apr*/}
-      {mode === "expert" && <p>APR: {(apr * 100).toFixed(1)} %</p>}
-      {/*expert mode*/}
+      <p>{t(`staking.${mode}.yearlyReturn`, { amount: yearlyReturn })}</p>
+      {mode === "expert" && (
+        <p>{t(`staking.${mode}.apr`)}: {(apr * 100).toFixed(1)} %</p>
+      )}
       {mode === "expert" && delegations.length > 0 && (
         <div>
-          <p>Number of delegations: {delegations.length}</p>
+          <p>{t(`staking.${mode}.delegations`)}: {delegations.length}</p>
           <ul>
             {delegations.map((d) => (
               <li key={d.validatorAddress}>
                 <p>
-                  {d.validatorAddress.slice(0, 6)}...
+                  {t(`staking.${mode}.validator`)}: {d.validatorAddress.slice(0, 6)}...
                   {d.validatorAddress.slice(-4)}
                 </p>
-                <p>Stake: {parseFloat(d.stake).toLocaleString()}</p>
-                <p>Rewards: {parseFloat(d.rewards).toLocaleString()}</p>
+                <p>{t(`staking.${mode}.stake`)}: {parseFloat(d.stake).toLocaleString()}</p>
+                <p>{t(`staking.${mode}.rewards`, { amount: parseFloat(d.rewards).toLocaleString() })}</p>
                 <button
                   disabled={isClaiming || d.rewards === "0" || isSuccess}
                   className={` ${isClaiming || d.rewards === "0" ? "bg-primary/20 cursor-not-allowed" : "bg-primary"}`}
                   onClick={() => claimSingleRewards(d.validatorAddress)}
                 >
                   {isClaiming
-                    ? t("staking.claiming")
+                    ? t(`staking.${mode}.claiming`)
                     : isSuccess
-                      ? t("staking.claimed")
+                      ? t(`staking.${mode}.claimed`)
                       : d.rewards === "0"
-                        ? t("staking.nothingToClaim")
-                        : t("staking.claimSingle")}
+                        ? t(`staking.${mode}.nothingToClaim`)
+                        : t(`staking.${mode}.claimSingle`)}
                 </button>
               </li>
             ))}

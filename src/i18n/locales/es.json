@@ -1,25 +1,60 @@
 {
     "staking": {
-        "title": "Tu Staking",
-        "totalStaked": "Total en Stake: {{amount}} TARA",
-        "rewards": "Recompensas: {{amount}} TARA",
-        "yearlyReturn": "Retorno anual estimado: aprox {{amount}} TARA",
-        "claiming": "Reclamando...",
-        "claimed": "¡Reclamado!",
-        "nothingToClaim": "Nada que reclamar",
-        "claimRewards": "Reclamar Recompensas",
-        "claimSingle": "Reclamar",
-        "loading": "Cargando..."
+        "easy": {
+            "title": "Tus Depósitos",
+            "totalStaked": "Total Depositado: {{amount}} TARA",
+            "rewards": "Ganancias: {{amount}} TARA",
+            "yearlyReturn": "Retorno anual estimado: aprox {{amount}} TARA",
+            "claiming": "Cobrando...",
+            "claimed": "¡Cobrado!",
+            "nothingToClaim": "Nada que cobrar",
+            "claimRewards": "Cobrar Ganancias",
+            "claimSingle": "Cobrar",
+            "loading": "Cargando...",
+            "apr": "Retorno Anual",
+            "delegations": "Número de socios de ganancias",
+            "stake": "Depositado",
+            "validator": "Socio de Ganancias"
+        },
+        "expert": {
+            "title": "Tu Staking",
+            "totalStaked": "Total en Stake: {{amount}} TARA",
+            "rewards": "Recompensas: {{amount}} TARA",
+            "yearlyReturn": "Retorno anual estimado: aprox {{amount}} TARA",
+            "claiming": "Reclamando...",
+            "claimed": "¡Reclamado!",
+            "nothingToClaim": "Nada que reclamar",
+            "claimRewards": "Reclamar Recompensas",
+            "claimSingle": "Reclamar",
+            "loading": "Cargando...",
+            "apr": "APR",
+            "delegations": "Número de delegaciones",
+            "stake": "Stake",
+            "validator": "Validador"
+        }
     },
     "validators": {
-        "title": "Validadores",
-        "loading": "Cargando validadores...",
-        "error": "Error cargando validadores",
-        "notFound": "No se encontraron validadores.",
-        "staked": "En stake",
-        "commission": "Comisión",
-        "status": "Estado",
-        "active": "Activo",
-        "inactive": "Inactivo"
+        "easy": {
+            "title": "Socios de Ganancias",
+            "loading": "Cargando socios de ganancias...",
+            "error": "Error cargando socios de ganancias",
+            "notFound": "No se encontraron socios de ganancias.",
+            "staked": "Depositado",
+            "commission": "Tarifa del Socio",
+            "status": "Estado",
+            "active": "Activo",
+            "inactive": "Inactivo"
+        },
+        "expert": {
+            "title": "Validadores",
+            "loading": "Cargando validadores...",
+            "error": "Error cargando validadores",
+            "notFound": "No se encontraron validadores.",
+            "staked": "En stake",
+            "commission": "Comisión",
+            "status": "Estado",
+            "active": "Activo",
+            "inactive": "Inactivo"
+        }
     }
 }

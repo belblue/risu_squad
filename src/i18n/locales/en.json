@@ -1,25 +1,60 @@
 {
     "staking": {
-        "title": "Your Staking",
-        "totalStaked": "Total Staked: {{amount}} TARA",
-        "rewards": "Rewards: {{amount}} TARA",
-        "yearlyReturn": "Yearly return estimation: around {{amount}} TARA",
-        "claiming": "Claiming...",
-        "claimed": "Claimed!",
-        "nothingToClaim": "Nothing to claim",
-        "claimRewards": "Claim Rewards",
-        "claimSingle": "Claim",
-        "loading": "Loading..."
+        "easy": {
+            "title": "Your Deposits",
+            "totalStaked": "Total Deposited: {{amount}} TARA",
+            "rewards": "Earnings: {{amount}} TARA",
+            "yearlyReturn": "Yearly return estimation: around {{amount}} TARA",
+            "claiming": "Collecting...",
+            "claimed": "Collected!",
+            "nothingToClaim": "Nothing to collect",
+            "claimRewards": "Collect Earnings",
+            "claimSingle": "Collect",
+            "loading": "Loading...",
+            "apr": "Yearly Return",
+            "delegations": "Number of earning partners",
+            "stake": "Deposited",
+            "validator": "Earning Partner"
+        },
+        "expert": {
+            "title": "Your Staking",
+            "totalStaked": "Total Staked: {{amount}} TARA",
+            "rewards": "Rewards: {{amount}} TARA",
+            "yearlyReturn": "Yearly return estimation: around {{amount}} TARA",
+            "claiming": "Claiming...",
+            "claimed": "Claimed!",
+            "nothingToClaim": "Nothing to claim",
+            "claimRewards": "Claim Rewards",
+            "claimSingle": "Claim",
+            "loading": "Loading...",
+            "apr": "APR",
+            "delegations": "Number of delegations",
+            "stake": "Stake",
+            "validator": "Validator"
+        }
     },
     "validators": {
-        "title": "Validators",
-        "loading": "Loading validators...",
-        "error": "Error loading validators",
-        "notFound": "No validators found.",
-        "staked": "Staked",
-        "commission": "Commission",
-        "status": "Status",
-        "active": "Active",
-        "inactive": "Inactive"
+        "easy": {
+            "title": "Earning Partners",
+            "loading": "Loading earning partners...",
+            "error": "Error loading earning partners",
+            "notFound": "No earning partners found.",
+            "staked": "Deposited",
+            "commission": "Partner's Fee",
+            "status": "Status",
+            "active": "Active",
+            "inactive": "Inactive"
+        },
+        "expert": {
+            "title": "Validators",
+            "loading": "Loading validators...",
+            "error": "Error loading validators",
+            "notFound": "No validators found.",
+            "staked": "Staked",
+            "commission": "Commission",
+            "status": "Status",
+            "active": "Active",
+            "inactive": "Inactive"
+        }
     }
 }
