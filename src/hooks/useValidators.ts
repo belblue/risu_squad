@@ -22,24 +22,28 @@ export function useValidators() {
         abi: DPOS_ABI,
         functionName: "getValidators",
         args: [0], //batch 0 for simplicity
+        chainId: 841, // Taraxa mainnet
       },
       {
         address: DPOS_CONTRACT_ADDRESS,
         abi: DPOS_ABI,
         functionName: "getValidators",
         args: [1], //batch 1
+        chainId: 841,
       },
       {
         address: DPOS_CONTRACT_ADDRESS,
         abi: DPOS_ABI,
         functionName: "getValidators",
         args: [2], //batch 2
+        chainId: 841,
       },
       {
         address: DPOS_CONTRACT_ADDRESS,
         abi: DPOS_ABI,
         functionName: "getValidators",
         args: [3], //batch 3
+        chainId: 841,
       },
     ],
   });

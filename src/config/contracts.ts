@@ -76,4 +76,12 @@ export const DPOS_ABI = [
     inputs: [],
     outputs: [],
   },
+  //claim rewards form a single valdator
+  {
+    name: "claimRewards",
+    type: "function",
+    stateMutability: "nonpayable",
+    inputs: [{ name: "validator", type: "address" }],
+    outputs: [],
+  },
 ] as const;

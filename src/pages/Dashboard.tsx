@@ -72,7 +72,7 @@ export function Dashboard({ mode }: DashboardProps) {
         value={`${formattedBalance}"TARA"`}
         subtitle="Your current balance"
       />
-      <StakerCard /> {/*mode={mode}*/}
+      <StakerCard mode={mode} /> {/*mode={mode}*/}
       <StatsCard title="Staked Tara" value="250" subtitle="Earning rewards" />
       <StatsCard
         title="Total earnings"

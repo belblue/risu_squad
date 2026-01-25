@@ -1,0 +1,25 @@
+{
+    "staking": {
+        "title": "Tu Staking",
+        "totalStaked": "Total en Stake: {{amount}} TARA",
+        "rewards": "Recompensas: {{amount}} TARA",
+        "yearlyReturn": "Retorno anual estimado: aprox {{amount}} TARA",
+        "claiming": "Reclamando...",
+        "claimed": "¡Reclamado!",
+        "nothingToClaim": "Nada que reclamar",
+        "claimRewards": "Reclamar Recompensas",
+        "claimSingle": "Reclamar",
+        "loading": "Cargando..."
+    },
+    "validators": {
+        "title": "Validadores",
+        "loading": "Cargando validadores...",
+        "error": "Error cargando validadores",
+        "notFound": "No se encontraron validadores.",
+        "staked": "En stake",
+        "commission": "Comisión",
+        "status": "Estado",
+        "active": "Activo",
+        "inactive": "Inactivo"
+    }
+}
