@@ -1,4 +1,6 @@
 import { useValidators, type Validator } from "../../hooks/useValidators";
+import { useStaking } from "../../hooks/useStaking";
+import { useConnection } from "wagmi";
 import { ValidatorCard } from "./validatorCard";
 
 interface ValidatorListProps {
@@ -6,6 +8,8 @@ interface ValidatorListProps {
 }
 export function ValidatorList({ mode }: ValidatorListProps) {
   const { validators, isLoading, error } = useValidators();
+  const { address } = useConnection();
+  const { delegate, isClaiming: isDelegating } = useStaking(address);
 
   if (isLoading) {
     return <p className="text-surface/60">Loading validators...</p>;
@@ -27,6 +31,8 @@ export function ValidatorList({ mode }: ValidatorListProps) {
             key={validator.address}
             validator={validator}
             mode={mode}
+            onDelegate={address ? delegate : undefined}
+            isDelegating={isDelegating}
           />
         ))}
       </div>

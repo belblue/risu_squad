@@ -84,4 +84,13 @@ export const DPOS_ABI = [
     inputs: [{ name: "validator", type: "address" }],
     outputs: [],
   },
+
+  // Delegate TARA to a validator (payable - amount sent as msg.value)
+  {
+    name: "delegate",
+    type: "function",
+    stateMutability: "payable",
+    inputs: [{ name: "validator", type: "address" }],
+    outputs: [],
+  },
 ] as const;

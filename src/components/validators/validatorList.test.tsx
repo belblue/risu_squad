@@ -7,15 +7,27 @@ vi.mock("../../hooks/useValidators", () => ({
   useValidators: vi.fn(),
 }));
 
-// Import the mocked hook so we can control its return value
+// Mock useStaking hook
+vi.mock("../../hooks/useStaking", () => ({
+  useStaking: vi.fn(),
+}));
+
+// Mock wagmi
+vi.mock("wagmi", () => ({
+  useConnection: vi.fn(),
+}));
+
+// Import the mocked hooks
 import { useValidators } from "../../hooks/useValidators";
+import { useStaking } from "../../hooks/useStaking";
+import { useConnection } from "wagmi";
 
 //Mock validator data
 const mockValidators = [
   {
     address: "0x1234567890abcdef1234567890abcdef12345678",
     totalStake: "1000000",
-    comission: 10,
+    commission: 10,
     description: "validator 1",
     yield: 14.4,
     rank: 1,
@@ -24,7 +36,7 @@ const mockValidators = [
   {
     address: "0x1234567890abcdef1234567890abcdef12345685",
     totalStake: "1000000",
-    comission: 10,
+    commission: 10,
     description: "validator 2",
     yield: 14.4,
     rank: 1,
@@ -33,6 +45,17 @@ const mockValidators = [
 ];
 
 describe("ValidatorList", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.mocked(useConnection).mockReturnValue({
+      address: "0xabc123",
+    } as any);
+    vi.mocked(useStaking).mockReturnValue({
+      delegate: vi.fn(),
+      isClaiming: false,
+    } as any);
+  });
+
   //shows loading message
   it("shows loading message", () => {
     vi.mocked(useValidators).mockReturnValue({
@@ -66,7 +89,7 @@ describe("ValidatorList", () => {
     expect(screen.getByText("No validators found.")).toBeInTheDocument();
   });
   //renders validator cards
-  it("show no validators", () => {
+  it("renders validator cards", () => {
     vi.mocked(useValidators).mockReturnValue({
       validators: mockValidators,
       isLoading: false,
@@ -78,8 +101,8 @@ describe("ValidatorList", () => {
     expect(screen.getByText("validator 2")).toBeInTheDocument();
   });
 
-  //passes mode prop	In expert mode, full addresses are visible
-  it("passes mode prop - shiwing full address in expert mode", () => {
+  //passes mode prop - In expert mode, full addresses are visible
+  it("passes mode prop - showing full address in expert mode", () => {
     vi.mocked(useValidators).mockReturnValue({
       validators: mockValidators,
       isLoading: false,

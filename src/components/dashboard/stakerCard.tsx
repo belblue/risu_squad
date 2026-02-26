@@ -1,5 +1,6 @@
 import { useConnection } from "wagmi";
 import { useStaking } from "../../hooks/useStaking";
+import toast from "react-hot-toast";
 
 import { useTranslation } from "react-i18next";
 
@@ -27,20 +28,51 @@ export function StakerCard({ mode }: StakerCardProps) {
   if (isLoading) return <div className="p-4">{t(`staking.${mode}.loading`)}</div>;
 
   return (
-    <div className="bg-secondary p-6 rounded-lg">
-      <h2 className="text-xl mb-4">{t(`staking.${mode}.title`)}</h2>
-
-      <div className="space-y-2">
-        <p>
-          {t(`staking.${mode}.totalStaked`, { amount: totalStaked.toLocaleString() })}
-        </p>
-        <p>{t(`staking.${mode}.rewards`, { amount: totalRewards.toFixed(4) })}</p>
+    <div className="bg-secondary/60 border border-surface/10 rounded-xl px-5 py-4 space-y-4">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <h2 className="text-lg font-semibold">{t(`staking.${mode}.title`)}</h2>
+        {mode === "expert" && (
+          <span className="text-xs text-surface/40">
+            {t(`staking.${mode}.apr`)}: {(apr * 100).toFixed(1)} %
+          </span>
+        )}
       </div>
 
+      {/* Summary stats */}
+      <div className="grid grid-cols-3 gap-4">
+        <div>
+          <p className="text-xs text-surface/40 uppercase tracking-wider">Staked</p>
+          <p className="text-sm font-medium mt-0.5">
+            {t(`staking.${mode}.totalStaked`, { amount: totalStaked.toLocaleString() })}
+          </p>
+        </div>
+        <div>
+          <p className="text-xs text-surface/40 uppercase tracking-wider">Rewards</p>
+          <p className="text-sm font-semibold text-primary mt-0.5">
+            {t(`staking.${mode}.rewards`, { amount: totalRewards.toFixed(4) })}
+          </p>
+        </div>
+        <div>
+          <p className="text-xs text-surface/40 uppercase tracking-wider">Yearly return</p>
+          <p className="text-sm font-medium mt-0.5">
+            {t(`staking.${mode}.yearlyReturn`, { amount: yearlyReturn })}
+          </p>
+        </div>
+      </div>
+
+      {/* Claim all button */}
       <button
-        onClick={claimAllRewards}
+        onClick={async () => {
+          try {
+            await claimAllRewards();
+            toast.success(t(`staking.${mode}.claimSuccess`));
+          } catch {
+            toast.error(t(`staking.${mode}.claimError`));
+          }
+        }}
         disabled={isClaiming || totalRewards === 0}
-        className={`mt-4 px-4 py-2 rounded w-full
+        className={`px-4 py-2 rounded-lg text-sm font-medium w-full
             ${
               isClaiming || totalRewards === 0
                 ? "bg-surface/20 text-surface/40 cursor-not-allowed"
@@ -56,26 +88,46 @@ export function StakerCard({ mode }: StakerCardProps) {
               ? t(`staking.${mode}.nothingToClaim`)
               : t(`staking.${mode}.claimRewards`)}
       </button>
-      <p>{t(`staking.${mode}.yearlyReturn`, { amount: yearlyReturn })}</p>
-      {mode === "expert" && (
-        <p>{t(`staking.${mode}.apr`)}: {(apr * 100).toFixed(1)} %</p>
-      )}
+
+      {/* Expert: delegation list */}
       {mode === "expert" && delegations.length > 0 && (
-        <div>
-          <p>{t(`staking.${mode}.delegations`)}: {delegations.length}</p>
-          <ul>
+        <div className="space-y-2">
+          <p className="text-xs text-surface/40 uppercase tracking-wider">
+            {t(`staking.${mode}.delegations`)}: {delegations.length}
+          </p>
+          <div className="space-y-2">
             {delegations.map((d) => (
-              <li key={d.validatorAddress}>
-                <p>
-                  {t(`staking.${mode}.validator`)}: {d.validatorAddress.slice(0, 6)}...
-                  {d.validatorAddress.slice(-4)}
-                </p>
-                <p>{t(`staking.${mode}.stake`)}: {parseFloat(d.stake).toLocaleString()}</p>
-                <p>{t(`staking.${mode}.rewards`, { amount: parseFloat(d.rewards).toLocaleString() })}</p>
+              <div key={d.validatorAddress} className="bg-dark/30 rounded-lg px-4 py-3 flex items-center justify-between gap-4">
+                <div className="grid grid-cols-3 gap-4 flex-1 text-sm">
+                  <div>
+                    <p className="text-xs text-surface/40">Validator</p>
+                    <p className="font-mono mt-0.5">
+                      {t(`staking.${mode}.validator`)}: {d.validatorAddress.slice(0, 6)}...
+                      {d.validatorAddress.slice(-4)}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-surface/40">Stake</p>
+                    <p className="mt-0.5">{t(`staking.${mode}.stake`)}: {parseFloat(d.stake).toLocaleString()}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-surface/40">Rewards</p>
+                    <p className="text-primary font-semibold mt-0.5">
+                      {t(`staking.${mode}.rewards`, { amount: parseFloat(d.rewards).toLocaleString() })}
+                    </p>
+                  </div>
+                </div>
                 <button
                   disabled={isClaiming || d.rewards === "0" || isSuccess}
-                  className={` ${isClaiming || d.rewards === "0" ? "bg-primary/20 cursor-not-allowed" : "bg-primary"}`}
-                  onClick={() => claimSingleRewards(d.validatorAddress)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium shrink-0 ${isClaiming || d.rewards === "0" ? "bg-surface/20 text-surface/40 cursor-not-allowed" : "bg-primary hover:bg-primary/80"}`}
+                  onClick={async () => {
+                    try {
+                      await claimSingleRewards(d.validatorAddress);
+                      toast.success(t(`staking.${mode}.claimSuccess`));
+                    } catch {
+                      toast.error(t(`staking.${mode}.claimError`));
+                    }
+                  }}
                 >
                   {isClaiming
                     ? t(`staking.${mode}.claiming`)
@@ -85,9 +137,9 @@ export function StakerCard({ mode }: StakerCardProps) {
                         ? t(`staking.${mode}.nothingToClaim`)
                         : t(`staking.${mode}.claimSingle`)}
                 </button>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       )}
     </div>

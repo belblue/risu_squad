@@ -14,7 +14,16 @@
             "apr": "Retorno Anual",
             "delegations": "Número de socios de ganancias",
             "stake": "Depositado",
-            "validator": "Socio de Ganancias"
+            "validator": "Socio de Ganancias",
+            "claimSuccess": "¡Ganancias cobradas con éxito!",
+            "claimError": "Error al cobrar ganancias",
+            "delegateBtn": "Depositar",
+            "delegating": "Depositando...",
+            "delegateSuccess": "¡Depósito exitoso!",
+            "delegateError": "Error al depositar",
+            "enterAmount": "Monto en TARA",
+            "confirm": "Confirmar",
+            "cancel": "Cancelar"
         },
         "expert": {
             "title": "Tu Staking",
@@ -30,7 +39,16 @@
             "apr": "APR",
             "delegations": "Número de delegaciones",
             "stake": "Stake",
-            "validator": "Validador"
+            "validator": "Validador",
+            "claimSuccess": "¡Recompensas reclamadas con éxito!",
+            "claimError": "Error al reclamar recompensas",
+            "delegateBtn": "Stakear",
+            "delegating": "Stakeando...",
+            "delegateSuccess": "¡Stakeado con éxito!",
+            "delegateError": "Error al stakear",
+            "enterAmount": "Monto en TARA",
+            "confirm": "Confirmar",
+            "cancel": "Cancelar"
         }
     },
     "validators": {

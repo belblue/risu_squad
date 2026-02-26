@@ -16,9 +16,18 @@ vi.mock("../../hooks/useStaking", () => ({
   useStaking: vi.fn(),
 }));
 
+//mock react-hot-toast
+vi.mock("react-hot-toast", () => ({
+  default: {
+    success: vi.fn(),
+    error: vi.fn(),
+  },
+}));
+
 //mock imports
 import { useStaking } from "../../hooks/useStaking";
 import { useConnection } from "wagmi";
+import toast from "react-hot-toast";
 
 const defaultMock = {
   delegations: [],
@@ -181,6 +190,72 @@ describe("StakerCard", () => {
     render(<StakerCard mode="easy" />);
     expect(screen.getByText(/Total Deposited: 1,500 TARA/)).toBeInTheDocument();
     expect(screen.getByText("Collect Earnings")).toBeInTheDocument();
+  });
+
+  //shows success toast on claim all
+  it("shows success toast when claimAllRewards succeeds", async () => {
+    const mockClaimAll = vi.fn().mockResolvedValue(undefined);
+    vi.mocked(useStaking).mockReturnValue({
+      ...defaultMock,
+      totalStaked: 1500,
+      totalRewards: 112,
+      claimAllRewards: mockClaimAll,
+    });
+    render(<StakerCard mode="expert" />);
+
+    await userEvent.click(screen.getByRole("button", { name: "Claim Rewards" }));
+    expect(toast.success).toHaveBeenCalledWith("Rewards claimed successfully!");
+  });
+
+  //shows error toast on claim all failure
+  it("shows error toast when claimAllRewards fails", async () => {
+    const mockClaimAll = vi.fn().mockRejectedValue(new Error("tx failed"));
+    vi.mocked(useStaking).mockReturnValue({
+      ...defaultMock,
+      totalStaked: 1500,
+      totalRewards: 112,
+      claimAllRewards: mockClaimAll,
+    });
+    render(<StakerCard mode="expert" />);
+
+    await userEvent.click(screen.getByRole("button", { name: "Claim Rewards" }));
+    expect(toast.error).toHaveBeenCalledWith("Failed to claim rewards");
+  });
+
+  //shows success toast on single claim
+  it("shows success toast when claimSingleRewards succeeds", async () => {
+    const mockClaimSingle = vi.fn().mockResolvedValue(undefined);
+    vi.mocked(useStaking).mockReturnValue({
+      ...defaultMock,
+      delegations: [
+        { validatorAddress: "0xabc123def456abc123def456abc123def456abc1", stake: "1000", rewards: "50" },
+      ],
+      totalStaked: 1000,
+      totalRewards: 50,
+      claimSingleRewards: mockClaimSingle,
+    });
+    render(<StakerCard mode="expert" />);
+
+    await userEvent.click(screen.getByText("Claim"));
+    expect(toast.success).toHaveBeenCalledWith("Rewards claimed successfully!");
+  });
+
+  //shows error toast on single claim failure
+  it("shows error toast when claimSingleRewards fails", async () => {
+    const mockClaimSingle = vi.fn().mockRejectedValue(new Error("tx failed"));
+    vi.mocked(useStaking).mockReturnValue({
+      ...defaultMock,
+      delegations: [
+        { validatorAddress: "0xabc123def456abc123def456abc123def456abc1", stake: "1000", rewards: "50" },
+      ],
+      totalStaked: 1000,
+      totalRewards: 50,
+      claimSingleRewards: mockClaimSingle,
+    });
+    render(<StakerCard mode="expert" />);
+
+    await userEvent.click(screen.getByText("Claim"));
+    expect(toast.error).toHaveBeenCalledWith("Failed to claim rewards");
   });
 
   //easy mode does not show delegations

@@ -14,7 +14,16 @@
             "apr": "Yearly Return",
             "delegations": "Number of earning partners",
             "stake": "Deposited",
-            "validator": "Earning Partner"
+            "validator": "Earning Partner",
+            "claimSuccess": "Earnings collected successfully!",
+            "claimError": "Failed to collect earnings",
+            "delegateBtn": "Deposit",
+            "delegating": "Depositing...",
+            "delegateSuccess": "Deposit successful!",
+            "delegateError": "Failed to deposit",
+            "enterAmount": "Amount in TARA",
+            "confirm": "Confirm",
+            "cancel": "Cancel"
         },
         "expert": {
             "title": "Your Staking",
@@ -30,7 +39,16 @@
             "apr": "APR",
             "delegations": "Number of delegations",
             "stake": "Stake",
-            "validator": "Validator"
+            "validator": "Validator",
+            "claimSuccess": "Rewards claimed successfully!",
+            "claimError": "Failed to claim rewards",
+            "delegateBtn": "Stake",
+            "delegating": "Staking...",
+            "delegateSuccess": "Staked successfully!",
+            "delegateError": "Failed to stake",
+            "enterAmount": "Amount in TARA",
+            "confirm": "Confirm",
+            "cancel": "Cancel"
         }
     },
     "validators": {

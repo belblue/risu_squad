@@ -5,7 +5,7 @@ import {
   useSwitchChain,
   useConnection,
 } from "wagmi";
-import { formatUnits } from "viem";
+import { formatUnits, parseEther } from "viem";
 import { DPOS_CONTRACT_ADDRESS, DPOS_ABI } from "../config/contracts";
 
 export interface Delegation {
@@ -89,12 +89,28 @@ export function useStaking(userAddress: `0x${string}` | undefined) {
     });
   };
 
+  //delegate TARA to a validator
+  const delegate = async (validatorAddress: string, amount: string) => {
+    if (chainId !== TARAXA_CHAIN_ID) {
+      await switchChainAsync({ chainId: TARAXA_CHAIN_ID });
+    }
+    await writeContractAsync({
+      address: DPOS_CONTRACT_ADDRESS,
+      abi: DPOS_ABI,
+      functionName: "delegate",
+      args: [validatorAddress as `0x${string}`],
+      value: parseEther(amount),
+      chainId: TARAXA_CHAIN_ID,
+    });
+  };
+
   return {
     delegations,
     totalStaked,
     totalRewards,
     claimAllRewards,
     claimSingleRewards,
+    delegate,
     isLoading,
     error,
     refetch,
